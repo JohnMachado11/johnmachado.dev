@@ -1,0 +1,5 @@
+# Everyone is welcome to crawl this site, including search engines and AI agents.
+User-agent: *
+Allow: /
+
+Sitemap: https://johnmachado.dev/sitemap.xml

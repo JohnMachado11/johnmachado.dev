@@ -1,0 +1,1148 @@
+/* ---------- Tokens (Midnight) ---------- */
+:root {
+  --bg: #0a0c10;
+  --surface: #12161c;
+  --ink: #f1f5f9;
+  --ink-soft: #c9d2dd;
+  --muted: #a1acbb;
+  --line: #222a35;
+  --accent: #46d1fc;
+  --accent-soft: #0f2a35;
+  --button-ink: #0a0c10;
+  --footer-bg: #06080b;
+
+  --sans: "Inter", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Headline typography */
+  --display: "Manrope", var(--sans);
+  --display-weight: 800;
+  --display-tracking: -0.045em;
+
+  --radius: 14px;
+  --gutter: 24px;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { margin: 0; font-weight: 400; }
+p { margin: 0; }
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kicker {
+  font: 500 12px/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(10, 12, 16, 0.85); /* for browsers without color-mix(), e.g. Safari before 16.2 */
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+}
+
+.logo { flex: none; font-size: 24px; line-height: 1; }
+
+/* Links wrap onto a second line only if they can't fit (e.g. with a large text-size setting) */
+.nav nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 28px; }
+
+/* Vertical padding gives each link a 44px-tall tap area inside the 60px bar */
+.nav nav a {
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.nav nav a:hover { color: var(--ink); }
+
+/* ---------- Buttons ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 15px/1.2 var(--sans);
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.button:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+.button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--button-ink);
+}
+.button.primary:hover { box-shadow: 0 6px 24px color-mix(in srgb, var(--accent) 35%, transparent); }
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 56px;
+  align-items: center;
+  padding-top: 76px;
+  padding-bottom: 0;
+}
+
+.hero h1 {
+  font-size: clamp(60px, 9.5vw, 116px);
+  line-height: 0.95;
+  margin: 0 0 24px;
+}
+
+.roles {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  font-size: clamp(19px, 2.2vw, 23px);
+  line-height: 1.45;
+  color: var(--ink);
+}
+/* Keeps "Jiu-Jitsu" from splitting at its hyphen */
+.nowrap { white-space: nowrap; }
+
+.lede {
+  max-width: 540px;
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-bottom: 30px;
+}
+
+.hero-social {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 18px 0 0;
+}
+.hero-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s, border-color 0.15s;
+}
+.hero-social a:hover { color: var(--accent); border-color: var(--accent); }
+.social-label { margin: 26px 0 0; color: var(--muted); }
+.social-label + .hero-social { margin-top: 10px; }
+.hero-social .icon { font-size: 16px; }
+
+.portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-width: 340px;
+  justify-self: end;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding-top: 80px;
+  scroll-margin-top: 40px;
+}
+
+.section h2 {
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1.05;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 36px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+}
+.more:hover { text-decoration: underline; }
+
+/* About */
+.prose { max-width: 680px; font-size: 18px; }
+.prose p + p { margin-top: 1.1em; }
+/* Even out line lengths so no line ends half-empty and no word sits alone on the last line */
+.prose p { text-wrap: pretty; }
+.prose strong { font-weight: 600; }
+.prose a { color: var(--accent); }
+.prose a:hover { text-decoration: underline; }
+
+/* ---------- Work timeline ---------- */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.timeline > li {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.timeline > li:first-child { border-top: 0; padding-top: 5px; }
+.timeline > li:last-child { padding-bottom: 0; }
+
+.when {
+  font: 400 13px/1.9 var(--mono);
+  color: var(--muted);
+}
+
+.timeline h3 {
+  font: 600 19px/1.35 var(--sans);
+}
+.org {
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 2px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.badge .icon { font-size: 13px; }
+
+.job-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* Collapsible work entries: header always visible, bullets on click */
+.job summary {
+  list-style: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.job summary::-webkit-details-marker { display: none; }
+.job summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.job summary:hover h3 { color: var(--accent); }
+.job h3 { transition: color 0.15s; }
+
+.chevron {
+  margin-left: auto;
+  align-self: center;
+  font-size: 20px;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+.job[open] .chevron { transform: rotate(180deg); }
+
+.job-body {
+  margin-top: 16px;
+  padding-left: 58px;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+}
+.job-body .bullets { margin-bottom: 4px; }
+.job-body .bullets li + li { margin-top: 8px; }
+
+.job-note {
+  margin-bottom: 10px;
+  font: 400 12.5px/1.6 var(--mono);
+  color: var(--muted);
+}
+.badge-sm {
+  gap: 4px;
+  padding: 1px 7px 1px 5px;
+  font-size: 10px;
+  /* Stays on one line; on desktop it may run a little past the date column into the gap */
+  white-space: nowrap;
+}
+.badge-sm .icon { font-size: 11px; }
+.badge-sm[title] { cursor: help; }
+/* Under the dates on desktop, beside them on phones */
+.when .badge-sm { display: flex; width: fit-content; margin-top: 6px; }
+/* Earlier role after a promotion */
+.job-body .bullets + .job-note { margin-top: 22px; }
+
+/* Organization logo tile; logos sit on white so brand colors stay true */
+.mark {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 5px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+/* Round and wide logos read small inside a square tile, so they get a thinner margin */
+.mark.snug { padding: 2px; }
+.mark.mono {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.bullets {
+  margin: 0;
+  padding-left: 1.1em;
+}
+.bullets li + li { margin-top: 6px; }
+.bullets li::marker { color: var(--accent); }
+
+/* ---------- Research ---------- */
+.papers {
+  display: grid;
+  gap: 16px;
+}
+.paper {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.2s;
+}
+.paper:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.paper-meta {
+  font: 400 12.5px/1.5 var(--mono);
+  color: var(--accent);
+}
+.paper h3 {
+  margin: 8px 0 6px;
+  font: 600 19px/1.4 var(--sans);
+}
+.paper h3 a { transition: color 0.15s; }
+.paper h3 a:hover { color: var(--accent); }
+.paper-authors {
+  font-size: 14px;
+  color: var(--muted);
+}
+.paper-role {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 16px 0 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.paper-role .badge { flex: none; margin-top: 2px; }
+.paper-role .badges {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.paper-role .bullets { margin-top: 8px; }
+
+/* ---------- Press ---------- */
+.press-item {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 28px;
+  align-items: start;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.2s;
+}
+.press-item:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.press-list { display: grid; gap: 16px; }
+/* Leave room for the sticky top menu when a link jumps straight to a card */
+.press-item { scroll-margin-top: 84px; }
+.press-item.text-only { grid-template-columns: 1fr; }
+.press-text h3 a { transition: color 0.15s; }
+.press-text h3 {
+  margin: 8px 0 10px;
+  font: 600 19px/1.4 var(--sans);
+}
+.press-text h3 a:hover { color: var(--accent); }
+.press-text > p:not(.paper-meta) {
+  font-size: 15.5px;
+  color: var(--ink-soft);
+}
+.press-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* ---------- Athletics ---------- */
+.pull {
+  margin: 0 0 40px;
+  padding: 0 0 0 24px;
+  border-left: 3px solid var(--accent);
+  max-width: 760px;
+}
+.pull p {
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.15;
+}
+.pull footer {
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+
+.sports {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.sport {
+  --pad: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--pad);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.2s;
+}
+.sport:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.sport-figure {
+  margin: calc(-1 * var(--pad)) calc(-1 * var(--pad)) 8px;
+  border-bottom: 1px solid var(--line);
+}
+.sport-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.sport-figure figcaption {
+  padding: 10px var(--pad, 0);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.sport h3 {
+  font-size: 28px;
+  line-height: 1.15;
+}
+.sport > p:not(.kicker) { color: var(--ink-soft); }
+
+.career {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+.career > li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  column-gap: 16px;
+  row-gap: 2px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.career .when { grid-row: span 2; }
+.career .club { font-weight: 600; }
+.career .league { font-size: 14px; color: var(--muted); }
+.career > li > span { justify-self: start; }
+.career.with-marks > li { grid-template-columns: 110px 44px 1fr; }
+.career.with-marks .mark { grid-row: span 2; align-self: center; }
+.career .bullets { grid-column: 3; margin-top: 10px; }
+.career .more { grid-column: 3; justify-self: start; margin-top: 10px; }
+.sport .bullets { font-size: 14.5px; color: var(--ink-soft); }
+
+/* Black belt with three degree stripes on the red bar */
+.belt {
+  position: relative;
+  height: 26px;
+  margin: 6px 0;
+  background: #121212;
+  border: 1px solid #2c2c2c;
+  border-radius: 3px;
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.04);
+}
+.belt-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 9%;
+  width: 24%;
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+  background: #c4271d;
+}
+.belt-bar i {
+  width: 7%;
+  background: #f4f4f0;
+}
+
+/* ---------- Contact ---------- */
+.contact { padding-bottom: 24px; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.contact-lede {
+  max-width: 440px;
+  margin: 14px 0 28px;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+.contact-links {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  max-width: 440px;
+  margin: 0;
+  padding: 0;
+}
+.contact-links a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.contact-links a:hover { border-color: var(--accent); transform: translateX(2px); }
+.contact-links .icon { font-size: 20px; color: var(--accent); }
+.contact-links strong { display: block; font-weight: 600; }
+.contact-links small {
+  display: block;
+  font: 400 13px/1.4 var(--mono);
+  color: var(--muted);
+}
+
+.contact-form {
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.contact-form label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font: 400 16px/1.5 var(--sans);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.contact-form textarea { min-height: 140px; resize: vertical; }
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.contact-form .button { justify-self: start; cursor: pointer; }
+.contact-form .button:disabled { opacity: 0.6; cursor: wait; }
+.contact-form .hp { position: absolute; left: -9999px; }
+.form-status {
+  min-height: 1.4em;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  position: relative;
+  margin-top: 80px;
+  padding: 48px 0 32px;
+  background: var(--footer-bg);
+  color: #b9bdc5;
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--accent);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.footer-brand {
+  font-size: 26px;
+  line-height: 1.2;
+  word-spacing: 0.14em;
+  color: #fff;
+}
+.footer-tag { font-size: 14px; }
+.footer-bottom {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid #22272e;
+  font-size: 13px;
+  color: #7c828c;
+}
+
+/* ---------- Headline typography ---------- */
+.logo, .hero h1, .section h2,
+.sport h3, .footer-brand, .mark.mono, .pull p {
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+}
+.roles {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.job-body a { color: var(--accent); }
+.job-body a:hover { text-decoration: underline; }
+
+/* Expandable contributions list on research cards */
+.contrib { margin-top: 10px; }
+.contrib summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+}
+.contrib summary::-webkit-details-marker { display: none; }
+.contrib summary .chevron { margin-left: 0; font-size: 16px; color: inherit; }
+.contrib[open] summary .chevron { transform: rotate(180deg); }
+.contrib .bullets { margin-top: 8px; }
+
+/* Photo placed under the card title (bleeds to the card edges) */
+.sport-figure.inline {
+  margin: 4px calc(-1 * var(--pad)) 4px;
+  border-top: 1px solid var(--line);
+}
+.sport-figure.short .sport-photo { aspect-ratio: 2 / 1; object-position: 50% 30%; }
+.sport-figure.inline + .career > li:first-child { border-top: 0; padding-top: 6px; }
+.sports.lean .sport h3 { font-size: 24px; }
+.sports.lean .belt { height: 18px; margin: 2px 0; }
+
+/* Compact jiu-jitsu ranks */
+.ranks {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.ranks li {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.ranks strong { font-size: 14.5px; font-weight: 600; }
+.ranks span { font: 400 12.5px/1.4 var(--mono); color: var(--muted); }
+.ranks li:first-child { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+.rank-note { font-size: 13.5px; color: var(--muted); }
+
+/* Rank progression: one tile per rank, each showing its belt (degree stripes on the red bar) */
+.rank-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 10px 0 0;
+  padding: 0;
+}
+.rank-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+/* The current rank gets a small label: in the tile's corner, or under the year when the tile is narrow */
+.rank-steps li.current { position: relative; container-type: inline-size; }
+.rank-steps li > .rank-current {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font: 500 10px/1.4 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+/* Not enough room beside the belt (narrow desktop windows): put the label under the year */
+@container (max-width: 180px) {
+  .rank-steps li > .rank-current { position: static; align-self: flex-start; margin-top: 6px; }
+}
+.rank-steps .belt-mini { max-width: 100%; margin-bottom: 8px; }
+.rank-steps strong { font-size: 16.5px; font-weight: 600; line-height: 1.3; }
+.rank-steps li > span:not(.belt-mini):not(.rank-current) { font: 400 13px/1.4 var(--mono); color: var(--muted); }
+.rank-steps em { margin-top: 4px; font-style: normal; font-size: 12px; line-height: 1.4; color: var(--muted); }
+
+/* Instagram embed trimmed to header, video and "View more" row */
+.press-video { container-type: inline-size; }
+.ig-clip {
+  height: calc(95px + 56.25cqw);
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+/* Keyboard users who tab into the video get the same cyan focus ring as the rest of the site
+   (main.js adds .kb-focus, since browsers don't give embedded frames keyboard-focus styling) */
+.ig-clip.kb-focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ig-clip iframe {
+  display: block;
+  width: 100%;
+  height: 700px;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.ig-clip iframe.loaded { opacity: 1; }
+
+/* Until the embed loads, show the reel's cover photo with a spinner, then crossfade */
+.ig-clip { position: relative; }
+.ig-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.ig-clip.loaded .ig-loader { opacity: 0; }
+.ig-poster { position: absolute; inset: 0; background: #06080b; }
+.ig-poster img {
+  position: absolute;
+  top: 54px;
+  left: 0;
+  width: 100%;
+  height: 56.25cqw;
+  object-fit: cover;
+  opacity: 0.85;
+}
+.ig-spinner {
+  position: absolute;
+  top: calc(54px + 28.125cqw - 16px);
+  left: calc(50% - 16px);
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  will-change: transform; /* keep the spin on the graphics layer so busy loading can't stall it */
+}
+
+/* If the embed never loads (an ad blocker or tracking protection can block Instagram),
+   the cover photo becomes a link to the reel */
+.ig-clip.failed .ig-spinner { display: none; }
+.ig-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+}
+.ig-fallback:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.ig-play {
+  position: absolute;
+  top: calc(54px + 28.125cqw - 30px);
+  left: calc(50% - 30px);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(10, 12, 16, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  transition: background 0.2s;
+}
+.ig-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  border-style: solid;
+  border-width: 10px 0 10px 16px;
+  border-color: transparent transparent transparent #fff;
+  transform: translate(-50%, -50%);
+}
+.ig-fallback:hover .ig-play { background: rgba(10, 12, 16, 0.8); }
+.ig-fallback-label {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 54px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---------- Photo slider ---------- */
+.carousel {
+  margin: calc(-1 * var(--pad)) calc(-1 * var(--pad)) 8px;
+  /* Card color with a faint accent glow; it shows around photos that don't fill the frame */
+  background:
+    radial-gradient(120% 70% at 15% 0%, rgba(70, 209, 252, 0.08), transparent 60%),
+    radial-gradient(90% 60% at 100% 100%, rgba(70, 209, 252, 0.04), transparent 60%),
+    var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+/* The arrows and dots get their own strip under the photo (and photos rest on its top
+   edge), so the controls sit in the same place for every photo */
+.carousel-stage { position: relative; padding-bottom: 46px; }
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track .sport-photo {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+.carousel .sport-photo.contain { object-fit: contain; object-position: 50% 100%; }
+/* All captions share one grid cell; script eases the area's height to fit the current
+   caption, so content below glides instead of jumping. */
+.carousel-captions {
+  display: grid;
+  align-items: start;
+  overflow: hidden;
+  transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-captions { transition: none; }
+}
+.carousel-captions p {
+  grid-area: 1 / 1;
+  padding: 10px var(--pad);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.carousel-captions p.active { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .carousel-captions p { transition: none; transform: none; }
+}
+.carousel-btn {
+  position: absolute;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(10, 12, 16, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  line-height: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.carousel-btn svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.carousel-btn:hover { background: rgba(10, 12, 16, 0.6); }
+.carousel-btn.prev { right: 44px; }
+.carousel-btn.next { right: 10px; }
+.carousel-dots {
+  position: absolute;
+  left: 14px;
+  bottom: 19px;
+  display: flex;
+  gap: 6px;
+  pointer-events: none;
+}
+.carousel-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, transform 0.2s;
+}
+.carousel-dots span.active { background: #fff; transform: scale(1.2); }
+
+/* ---------- Small black belt with degree stripes (one per rank tile) ---------- */
+.belt-mini {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 104px;
+  height: 14px;
+  background: #121212;
+  border: 1px solid #2f2f2f;
+  border-radius: 2px;
+}
+/* Fixed pixel sizes (not percentages) so all three stripes render at exactly the same width */
+.belt-mini .belt-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  width: 36px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  padding-right: 5px;
+  background: #c4271d;
+}
+.belt-mini .belt-bar i { flex: none; width: 3px; background: #f4f4f0; }
+
+/* ---------- Responsive ---------- */
+/* Desktop Athletics: each sport is a full-width row, photos on the left and details on the right */
+@media (min-width: 861px) {
+  .sports { grid-template-columns: 1fr; }
+  .sport {
+    display: grid;
+    grid-template-columns: minmax(0, 46%) minmax(0, 1fr);
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: 36px;
+    row-gap: 14px;
+    align-content: start;
+  }
+  .sport > .carousel {
+    grid-column: 1;
+    grid-row: 1 / 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: calc(-1 * var(--pad)) 0 calc(-1 * var(--pad)) calc(-1 * var(--pad));
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+  .sport > :not(.carousel) { grid-column: 2; }
+  .sport > .kicker { margin-top: 4px; }
+  /* There's room to spare, so the caption area always fits the tallest caption and the
+     photo never shifts when the slide changes (overrides the height the script sets) */
+  .carousel-captions { height: auto !important; }
+  .carousel-captions p { font-size: 14.5px; }
+  /* Soccer: frame both photos at the action shot's full shape, so neither is cropped */
+  .sport.soccer .carousel-track .sport-photo {
+    aspect-ratio: 1125 / 914;
+    object-fit: contain;
+    object-position: 50% 100%;
+  }
+  /* Dates sit above each club so the bullets get the full column width */
+  .career.with-marks > li { grid-template-columns: 44px 1fr; column-gap: 14px; }
+  .career.with-marks .when { grid-column: 1 / -1; grid-row: auto; margin-bottom: 6px; }
+  .career .bullets,
+  .career .more { grid-column: 1 / -1; }
+}
+
+/* Below 1100px the Press card's text column gets too narrow beside the video, so stack them */
+@media (max-width: 1099px) {
+  .press-item { grid-template-columns: 1fr; }
+  .press-video { max-width: 400px; }
+}
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 56px; }
+  .portrait { justify-self: start; max-width: 260px; order: -1; }
+  .split { grid-template-columns: 1fr; gap: 20px; }
+  .sports { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  /* Compact 2x2 grid of profile links on phones and tablets */
+  .contact-links { grid-template-columns: 1fr 1fr; gap: 8px; max-width: none; }
+  .contact-links a { gap: 10px; padding: 12px; }
+  .contact-links small { display: none; }
+  .contact-links .icon { font-size: 18px; }
+}
+
+@media (max-width: 560px) {
+  :root { --gutter: 16px; }
+  body { font-size: 16px; line-height: 1.6; }
+  .nav nav { gap: 0 18px; }
+  .nav nav a { font-size: 13px; }
+  .section { padding-top: 40px; }
+
+  /* Phone type scale */
+  .hero h1 { font-size: 52px; }
+  /* Shrink the titles just enough (never below 16px) to keep the longest one on a single line */
+  .roles { font-size: clamp(16px, calc((100vw - 2 * var(--gutter)) / 20.4), 18px); }
+  .lede,
+  .prose,
+  .contact-lede { font-size: 16px; }
+  .section h2 { font-size: 30px; }
+  .timeline h3,
+  .paper h3,
+  .press-text h3 { font-size: 17px; }
+  .job-body,
+  .press-text > p:not(.paper-meta) { font-size: 15px; }
+  .pull p { font-size: 24px; }
+  .sport h3 { font-size: 23px; }
+  .portrait { max-width: 200px; }
+  .timeline > li { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
+  .when .badge-sm { display: inline-flex; margin: 0 0 0 8px; vertical-align: 1px; }
+  .ranks { grid-template-columns: repeat(2, 1fr); }
+  /* Compact rank tiles on phones */
+  .rank-steps { gap: 8px; }
+  .rank-steps li { gap: 2px; padding: 10px 12px; }
+  .rank-steps .belt-mini { width: 64px; height: 9px; margin-bottom: 6px; }
+  .rank-steps .belt-mini .belt-bar { right: 6px; width: 22px; gap: 2px; padding-right: 3px; }
+  .rank-steps .belt-mini .belt-bar i { width: 2px; }
+  .rank-steps strong { font-size: 14px; }
+  .rank-steps li > span:not(.belt-mini):not(.rank-current) { font-size: 12px; }
+  .rank-steps li > .rank-current { position: static; align-self: flex-start; margin-top: 6px; }
+  .rank-steps em { margin-top: 2px; font-size: 11px; }
+  .job-body { padding-left: 0; }
+  .sport { --pad: 22px; }
+  .career > li { grid-template-columns: 1fr; }
+  .career .when { grid-row: auto; }
+  .career.with-marks > li { grid-template-columns: 44px 1fr; column-gap: 12px; }
+  .career.with-marks .when { grid-column: 1 / -1; }
+  .career .bullets,
+  .career .more { grid-column: 1 / -1; }
+  .paper { padding: 20px; }
+  .paper-role { flex-direction: column; gap: 12px; }
+  .paper-role .badges { flex-direction: row; }
+  .contact-form { padding: 20px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 400px) {
+  .nav nav { gap: 0 13px; }
+  .nav nav a { font-size: 12.5px; }
+}
+
+/* Smallest phones: keep the menu clear of the JM logo and the screen edge */
+@media (max-width: 340px) {
+  .nav nav { gap: 0 8px; }
+  .nav nav a { padding: 13px 0; font-size: 11.5px; }
+}
