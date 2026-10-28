@@ -1,0 +1,9 @@
+{%- comment -%}
+  An image with a caption in a post: {% include figure.html src="/assets/blog/post-name/photo.jpg" alt="What the image shows" caption="Optional caption" %}
+{%- endcomment -%}
+<figure>
+  <img src="{{ include.src }}" alt="{{ include.alt | escape }}" loading="lazy" decoding="async" />
+  {%- if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {%- endif %}
+</figure>

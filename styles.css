@@ -101,6 +101,14 @@ p { margin: 0; }
   transition: color 0.15s;
 }
 .nav nav a:hover { color: var(--ink); }
+.nav nav a[aria-current] { color: var(--ink); }
+
+/* With the Blog link there are six links: on phones, size and space them with the screen width
+   so the menu stays on one line down to 320px wide */
+@media (max-width: 560px) {
+  .nav nav.has-blog { gap: 0 clamp(5px, 7.2vw - 16.5px, 18px); }
+  .nav nav.has-blog a { font-size: clamp(10.5px, 3.2vw, 13px); }
+}
 
 /* ---------- Buttons ---------- */
 .actions {
@@ -188,6 +196,21 @@ p { margin: 0; }
 .social-label { margin: 26px 0 0; color: var(--muted); }
 .social-label + .hero-social { margin-top: 10px; }
 .hero-social .icon { font-size: 16px; }
+
+/* The newest blog post, under the social links */
+.hero-latest-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font: 600 17px/1.4 var(--sans);
+  color: var(--ink);
+  transition: color 0.15s;
+}
+.hero-latest-link .icon { color: var(--accent); transition: transform 0.15s; }
+.hero-latest-link:hover { color: var(--accent); }
+.hero-latest-link:hover .icon { transform: translateX(3px); }
+.hero-latest-meta { margin: 4px 0 0; font: 400 12.5px/1.5 var(--mono); color: var(--muted); }
 
 .portrait {
   position: relative;
@@ -1025,6 +1048,230 @@ p { margin: 0; }
 }
 .belt-mini .belt-bar i { flex: none; width: 3px; background: #f4f4f0; }
 
+/* ---------- Blog ---------- */
+/* Homepage: the three newest posts */
+.latest { list-style: none; margin: 0 0 18px; padding: 0; }
+.latest li { border-top: 1px solid var(--line); }
+.latest li:last-child { border-bottom: 1px solid var(--line); }
+.latest a {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+}
+.latest .post-date { font: 400 12.5px/1.5 var(--mono); color: var(--muted); }
+.latest .post-title { font: 600 17px/1.4 var(--sans); transition: color 0.15s; }
+.latest a:hover .post-title { color: var(--accent); }
+
+/* Blog page: every post as a card */
+.blog-lede {
+  max-width: 620px;
+  margin-bottom: 26px;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+.post-list { display: grid; gap: 16px; }
+.post-card h3 {
+  margin: 8px 0;
+  font: 600 20px/1.35 var(--sans);
+}
+.post-card h3 a { transition: color 0.15s; }
+.post-card h3 a:hover { color: var(--accent); }
+.post-summary {
+  margin-bottom: 14px;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+.tags li {
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: 500 12px/1.5 var(--mono);
+  color: var(--muted);
+}
+
+/* A post */
+.post {
+  max-width: calc(720px + 2 * var(--gutter));
+  padding-top: 64px;
+}
+.post-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 28px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.post-back:hover { color: var(--accent); }
+.post-back .icon { transform: rotate(180deg); }
+.post h1 {
+  margin: 10px 0 16px;
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  letter-spacing: -0.035em;
+  font-size: clamp(34px, 5.4vw, 52px);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.post-dek {
+  margin-bottom: 18px;
+  font-size: 19px;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.post-header { margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.post-header .tags { margin: 0; }
+.post-foot { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+.post-foot .post-back { margin-bottom: 0; }
+
+.post-body { max-width: none; }
+.post-body h2,
+.post-body h3 {
+  margin: 1.9em 0 0.5em;
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.post-body h2 { font-size: 27px; }
+.post-body h3 { font-size: 21px; }
+.post-body h2 + p,
+.post-body h3 + p { margin-top: 0; }
+.post-body ul,
+.post-body ol { margin: 1.1em 0; padding-left: 1.3em; }
+.post-body li + li { margin-top: 0.4em; }
+.post-body blockquote {
+  margin: 1.4em 0;
+  padding-left: 18px;
+  border-left: 3px solid var(--accent);
+  color: var(--ink-soft);
+}
+.post-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.post-body figure { margin: 1.6em 0; }
+.post-body figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.post-body code {
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  font: 400 0.86em var(--mono);
+}
+
+/* Code blocks, colored with the class names Jekyll's highlighter (Rouge) puts on each word */
+.post-body div.highlighter-rouge {
+  margin: 1.4em 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.post-body div.highlighter-rouge::before {
+  display: block;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--line);
+  font: 500 12px/1.4 var(--mono);
+  color: var(--muted);
+}
+.language-python::before { content: "python"; }
+.language-bash::before,
+.language-shell::before { content: "shell"; }
+.language-javascript::before,
+.language-js::before { content: "javascript"; }
+.language-json::before { content: "json"; }
+.language-yaml::before { content: "yaml"; }
+.language-html::before { content: "html"; }
+.language-css::before { content: "css"; }
+.post-body pre {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font: 400 13.5px/1.65 var(--mono);
+  color: var(--ink-soft);
+}
+.post-body pre code { padding: 0; border: 0; background: none; font: inherit; }
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp,
+.highlight .kr, .highlight .kt, .highlight .ow { color: var(--accent); }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd,
+.highlight .se, .highlight .sh, .highlight .si, .highlight .sr, .highlight .sx { color: #a6e3a1; }
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo, .highlight .il { color: #f5c27a; }
+.highlight .nb, .highlight .bp, .highlight .nf, .highlight .fm, .highlight .nc { color: #c9b6ff; }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .ch, .highlight .cp,
+.highlight .cpf, .highlight .cs { color: var(--muted); font-style: italic; }
+
+/* Tables: rows divided by lines; a table too wide for a phone scrolls sideways */
+.post-body table {
+  display: block;
+  max-width: 100%;
+  margin: 1.4em 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+.post-body th,
+.post-body td {
+  padding: 11px 20px 11px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.post-body th {
+  font: 500 12px/1.4 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.post-body td { color: var(--ink-soft); }
+.post-body td:first-child { color: var(--ink); font-weight: 500; }
+.post-body td strong { color: var(--accent); }
+
+/* YouTube embed, 16:9 */
+.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+@media (max-width: 560px) {
+  .blog-lede,
+  .post-dek { font-size: 16px; }
+  .post-card h3 { font-size: 17px; }
+  .post-summary { font-size: 15px; }
+  .latest a { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+  .latest .post-title { font-size: 16px; }
+  .post { padding-top: 36px; }
+  .post-body h2 { font-size: 23px; }
+  .post-body h3 { font-size: 19px; }
+  .post-body pre { font-size: 12.5px; }
+  .post-body table { font-size: 14.5px; }
+}
+
 /* ---------- Responsive ---------- */
 /* Desktop Athletics: each sport is a full-width row, photos on the left and details on the right */
 @media (min-width: 861px) {
@@ -1094,6 +1341,7 @@ p { margin: 0; }
 
   /* Phone type scale */
   .hero h1 { font-size: 52px; }
+  .hero-latest-link { font-size: 16px; }
   /* Shrink the titles just enough (never below 16px) to keep the longest one on a single line */
   .roles { font-size: clamp(16px, calc((100vw - 2 * var(--gutter)) / 20.4), 18px); }
   .lede,

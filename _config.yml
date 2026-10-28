@@ -1,0 +1,28 @@
+# Jekyll settings. GitHub Pages builds the site with these on every merge into main.
+title: John Machado
+description: Posts by John Machado about the AI projects he builds and the ideas behind them.
+author: John Machado
+url: https://johnmachado.dev
+# The site lives at the root of the domain. Set explicitly, or a GitHub Pages plugin guesses a path from the repo name
+baseurl: ""
+repository: JohnMachado11/johnmachado.dev
+timezone: America/Chicago
+# No theme: the site has its own layouts and styles. Without this, GitHub Pages adds its default theme's unused stylesheet
+theme: null
+
+# Posts live at /blog/<file name without the date>/
+permalink: /blog/:title/
+
+# Bump this when styles.css or main.js change, so browsers fetch the new files
+assets_version: "20261029"
+
+plugins:
+  - jekyll-feed
+feed:
+  path: blog/feed.xml
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

@@ -12,3 +12,15 @@ IMG_0843.jpg
 IMG_0844.jpg
 IMG_0845.jpg
 new/
+
+# Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/
+Gemfile.lock
+# Unfinished posts stay on this computer (the repo is public)
+_drafts/
+# Reference notes for writing posts (Jekyll skips folders that start with _)
+_notes/

@@ -1,0 +1,20 @@
+{%- comment -%}
+  Top menu. On the homepage the links scroll to each section; on other pages they lead back to it.
+  The Blog link appears once there is at least one post.
+{%- endcomment -%}
+{%- if page.url == "/" -%}{%- assign home = "" -%}{%- else -%}{%- assign home = "/" -%}{%- endif %}
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="{% if page.url == '/' %}#top{% else %}/{% endif %}" class="logo" aria-label="John Machado, home">JM</a>
+      <nav aria-label="Primary"{% if site.posts.size > 0 %} class="has-blog"{% endif %}>
+        <a href="{{ home }}#work">Work</a>
+        <a href="{{ home }}#research">Research</a>
+        {%- if site.posts.size > 0 %}
+        <a href="/blog/"{% if page.url == "/blog/" %} aria-current="page"{% elsif page.url contains "/blog/" %} aria-current="true"{% endif %}>Blog</a>
+        {%- endif %}
+        <a href="{{ home }}#press">Press</a>
+        <a href="{{ home }}#athletics">Athletics</a>
+        <a href="{{ home }}#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
