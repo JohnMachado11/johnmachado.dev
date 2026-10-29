@@ -1,0 +1,5 @@
+{%- comment -%}
+  Reading time in minutes, rounded to the nearest minute at 200 words a minute (never less than 1).
+  Usage: {% include minutes.html content=post.content %} min read
+{%- endcomment -%}
+{{ include.content | strip_html | number_of_words | plus: 100 | divided_by: 200 | at_least: 1 }}

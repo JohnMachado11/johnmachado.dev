@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,15 +20,7 @@
   <meta property="og:image:alt" content="John Machado: Senior AI Engineer, Former Professional Soccer Player, Third-Degree Black Belt in Brazilian Jiu-Jitsu" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
-  <link rel="icon" href="assets/favicon-192.png" type="image/png" sizes="192x192" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <meta name="theme-color" content="#0a0c10" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@500;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261025100715" />
+{% include assets.html %}
 
   <script type="application/ld+json">
     {
@@ -56,20 +51,10 @@
     <symbol id="i-hf" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
     <symbol id="i-trend" viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   </svg>
 
-  <header class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="logo" aria-label="John Machado, home">JM</a>
-      <nav aria-label="Primary">
-        <a href="#work">Work</a>
-        <a href="#research">Research</a>
-        <a href="#press">Press</a>
-        <a href="#athletics">Athletics</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+{% include header.html %}
 
   <main id="top">
     <!-- Hero -->
@@ -93,6 +78,15 @@
           <li><a href="https://huggingface.co/John-Machado" target="_blank" rel="noopener"><svg class="icon"><use href="#i-hf"/></svg>Hugging Face</a></li>
           <li><a href="https://www.instagram.com/johnmachado11/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-instagram"/></svg>Instagram</a></li>
         </ul>
+        {%- if site.posts.size > 0 %}
+        {%- assign latest = site.posts.first %}
+        <!-- The newest blog post (shown once there is at least one) -->
+        <div class="hero-latest">
+          <p class="kicker social-label">Latest post</p>
+          <a class="hero-latest-link" href="{{ latest.url }}">{{ latest.title | escape }} <svg class="icon"><use href="#i-next"/></svg></a>
+          <p class="hero-latest-meta">{{ latest.date | date: "%b %-d, %Y" }} · {% include minutes.html content=latest.content %} min read</p>
+        </div>
+        {%- endif %}
       </div>
       <div class="portrait">
         <img src="assets/headshot.jpg" alt="John Machado with the Dallas skyline behind him" width="800" height="1000" />
@@ -114,8 +108,8 @@
         <p>
           I'm also a big fan of mechanistic interpretability (essentially, neural network surgery), and
           I study it closely. The answers to how these models compute are already inside them; we just
-          can't see them clearly yet. Some of my favorite work is running experiments: digging into a
-          model's internals, and studying its behavior the way you'd study an organism, watching what it
+          can't see them clearly yet. Some of my favorite work is running experiments that dig into a
+          model's internals and study its behavior the way you'd study an organism, watching what it
           does in different scenarios and why.
         </p>
         <p>
@@ -364,6 +358,21 @@
         </article>
       </div>
     </section>
+    {%- if site.posts.size > 0 %}
+
+    <!-- Blog: the three newest posts (shown once there is at least one) -->
+    <section id="blog" class="container section split">
+      <h2>Blog</h2>
+      <div>
+        <ul class="latest">
+          {%- for post in site.posts limit: 3 %}
+          <li><a href="{{ post.url }}"><span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span><span class="post-title">{{ post.title | escape }}</span></a></li>
+          {%- endfor %}
+        </ul>
+        <a class="more" href="/blog/">All posts <svg class="icon"><use href="#i-next"/></svg></a>
+      </div>
+    </section>
+    {%- endif %}
 
     <!-- Press -->
     <section id="press" class="container section split">
@@ -484,7 +493,7 @@
             </div>
             <div class="carousel-captions" aria-live="polite">
               <p class="active">Dallas Sidekicks vs. Monterrey Flash · Monterrey, Mexico · January 2015</p>
-              <p aria-hidden="true">Marking up on Guillermo Franco of the Monterrey Flash: Mexican national team striker at the 2006 and 2010 World Cups, who also played in Europe for Villarreal (Spain) and West Ham United (England).</p>
+              <p aria-hidden="true">Marking up on Guillermo Franco of the Monterrey Flash, a Mexican national team striker at the 2006 and 2010 World Cups who also played in Europe for Villarreal (Spain) and West Ham United (England).</p>
               <p aria-hidden="true">In the locker room before Dallas Sidekicks vs. Saltillo Rancho Seco · Saltillo, Mexico · January 2015</p>
               <p aria-hidden="true">On the field before Dallas Sidekicks vs. Saltillo Rancho Seco · Saltillo, Mexico · January 2015</p>
               <p aria-hidden="true">Morning training with the Dallas Sidekicks · Dallas, Texas</p>
@@ -600,16 +609,8 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <p class="footer-brand">John Machado</p>
-        <p class="footer-tag">Senior AI Engineer · Former Pro Soccer Player · BJJ Black Belt</p>
-      </div>
-    </div>
-    <p class="container footer-bottom">© <span id="year">2026</span> John Machado · johnmachado.dev</p>
-  </footer>
+{% include footer.html %}
 
-  <script src="main.js?v=20261025100715" defer></script>
+  <script src="/main.js?v={{ site.assets_version }}" defer></script>
 </body>
 </html>

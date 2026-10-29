@@ -1,0 +1,30 @@
+/* Only the GPT-2 small post loads this: its word-similarity drawings (the angle between two words' rows) */
+.sim-defs { position: absolute; }
+.sim-pairs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.sim-pair { padding: 14px 14px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.sim-pair svg { display: block; width: 100%; max-width: 210px; height: auto; margin: 0 auto 10px; }
+.post-body .sim-pair p { margin: 0; }
+.sim-words { font: 600 15px/1.4 var(--sans); color: var(--ink); }
+.post-body .sim-vals { margin-top: 4px; }
+.sim-vals,
+.sim-angle { font: 400 13.5px/1.6 var(--mono); color: var(--ink-soft); }
+.sim-vals strong { color: var(--accent); font-weight: 500; }
+.sim-key { display: inline-block; width: 6.5ch; color: var(--muted); }
+.sim-first { stroke: var(--ink-soft); stroke-width: 2.5; }
+.sim-before { stroke: #6b7584; stroke-width: 2; stroke-dasharray: 4 4; }
+.sim-after { stroke: var(--accent); stroke-width: 2.5; }
+.sim-arc { fill: none; stroke: var(--accent); stroke-opacity: 0.45; stroke-width: 1.5; }
+.sim-head-first { fill: var(--ink-soft); }
+.sim-head-before { fill: #6b7584; }
+.sim-head-after { fill: var(--accent); }
+.sim-pair text { font-family: var(--sans); font-size: 10px; }
+.sim-label-first { fill: var(--ink); font-weight: 600; text-anchor: end; }
+.sim-label-second { fill: var(--accent); font-weight: 600; }
+.sim-label-start { fill: var(--muted); text-anchor: middle; }
+.sim-pair .sim-label-angle { fill: var(--accent); font: 500 9.5px var(--mono); text-anchor: middle; dominant-baseline: middle; }
+.sim-replay { cursor: pointer; }
+
+@media (max-width: 560px) {
+  .sim-pairs { grid-template-columns: 1fr; gap: 10px; }
+  .sim-pair svg { max-width: 230px; }
+}

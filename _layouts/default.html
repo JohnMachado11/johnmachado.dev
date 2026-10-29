@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title | escape }} | John Machado</title>
+  {%- assign description = page.summary | default: page.description %}
+  <meta name="description" content="{{ description | escape }}" />
+  <link rel="canonical" href="{{ page.url | absolute_url }}" />
+
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  <meta property="og:title" content="{{ page.title | escape }}" />
+  <meta property="og:description" content="{{ description | escape }}" />
+  {%- comment %} A post's own share image (front matter "image:") is 1200 × 630, like the site-wide one {% endcomment %}
+  <meta property="og:image" content="{{ page.image | default: '/assets/og-image.jpg' | absolute_url }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  {%- if page.layout == "post" %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+  {%- endif %}
+
+{% include assets.html %}
+  {%- comment %} A post's own stylesheets and scripts, listed in its front matter, load only on that post {% endcomment %}
+  {%- for href in page.styles %}
+  <link rel="stylesheet" href="{{ href }}?v={{ site.assets_version }}" />
+  {%- endfor %}
+  {% feed_meta %}
+</head>
+<body>
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </svg>
+
+{% include header.html %}
+
+  <main id="top">
+{{ content }}
+  </main>
+
+{% include footer.html %}
+
+  <script src="/main.js?v={{ site.assets_version }}" defer></script>
+  {%- for src in page.scripts %}
+  <script src="{{ src }}?v={{ site.assets_version }}" defer></script>
+  {%- endfor %}
+</body>
+</html>

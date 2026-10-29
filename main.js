@@ -164,3 +164,25 @@ if (form) {
     }
   });
 }
+
+// Blog posts: a short hyphenated word with a number in it ("GPT-2", "2-D") stays on one line,
+// so it never splits at the hyphen. Code is left alone.
+const keepWhole = (word) => /^[^-]{1,12}-[^-]{1,12}$/.test(word) && /\d/.test(word);
+document.querySelectorAll(".post-dek, .post-body").forEach((root) => {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const found = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (!node.parentElement.closest("pre, code") && node.data.split(/\s+/).some(keepWhole)) found.push(node);
+  }
+  found.forEach((node) => {
+    const pieces = node.data.split(/(\s+)/).map((piece) => {
+      if (!keepWhole(piece)) return piece;
+      const span = document.createElement("span");
+      span.className = "nowrap";
+      span.textContent = piece;
+      return span;
+    });
+    node.replaceWith(...pieces);
+  });
+});
