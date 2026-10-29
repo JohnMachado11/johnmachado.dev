@@ -172,7 +172,9 @@ p { margin: 0; }
   margin-bottom: 30px;
 }
 
-.hero-social {
+/* The homepage's social links, and a post's links to its model, code and so on, which share their look */
+.hero-social,
+.post-links {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -180,7 +182,8 @@ p { margin: 0; }
   padding: 0;
   margin: 18px 0 0;
 }
-.hero-social a {
+.hero-social a,
+.post-links a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -192,10 +195,13 @@ p { margin: 0; }
   font-weight: 500;
   transition: color 0.15s, border-color 0.15s;
 }
-.hero-social a:hover { color: var(--accent); border-color: var(--accent); }
+.hero-social a:hover,
+.post-links a:hover { color: var(--accent); border-color: var(--accent); }
 .social-label { margin: 26px 0 0; color: var(--muted); }
 .social-label + .hero-social { margin-top: 10px; }
-.hero-social .icon { font-size: 16px; }
+.hero-social .icon,
+.post-links .icon { font-size: 16px; }
+.post-links .icon:last-child { font-size: 14px; color: var(--muted); }
 
 /* The newest blog post, under the social links */
 .hero-latest-link {

@@ -36,6 +36,13 @@ Then write the post in Markdown. Put images in `assets/blog/<short name>/` (with
 
 To give a post its own share image (the picture shown when its link is shared on LinkedIn, Facebook, X, or in messages), save a 1200 × 630 image as `assets/blog/<short name>/share.jpg` and add `image: /assets/blog/<short name>/share.jpg` to the front matter. Without one, the post uses the site-wide card.
 
+To show buttons under the tags that link to the post's model, code, or anything else, list them in the front matter. `icon` is optional and can be `hf` or `github`.
+
+    links:
+      - label: Model on Hugging Face
+        url: https://huggingface.co/<user>/<model>
+        icon: hf
+
 Code that only one post needs (an interactive figure, say) lives in that post's folder and loads only on that post: list the files in its front matter, and keep `styles.css` and `main.js` for what every page uses.
 
     styles: [/assets/blog/<short name>/figure.css]
