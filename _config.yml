@@ -14,7 +14,7 @@ theme: null
 permalink: /blog/:title/
 
 # Bump this when styles.css or main.js change, so browsers fetch the new files
-assets_version: "20261029b"
+assets_version: "20261030"
 
 plugins:
   - jekyll-feed

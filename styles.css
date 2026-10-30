@@ -969,9 +969,12 @@ p { margin: 0; }
   color: var(--muted);
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Hidden captions sit on top of the shown one, so hide them fully once they fade out;
+     otherwise a mouse drag selects their invisible text instead */
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 0.6s;
 }
-.carousel-captions p.active { opacity: 1; transform: none; }
+.carousel-captions p.active { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
 @media (prefers-reduced-motion: reduce) {
   .carousel-captions p { transition: none; transform: none; }
 }
