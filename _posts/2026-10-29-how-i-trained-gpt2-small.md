@@ -1,6 +1,6 @@
 ---
 title: How I trained GPT-2 small from scratch
-summary: I wrote GPT-2 by hand in PyTorch, then trained GPT-2 small (124 million parameters) from random weights on 9.85 billion tokens. It took one rented GPU, 15.6 hours of training, and about $12 of compute in all. On held-out educational web text, it beats OpenAI's original.
+summary: I wrote GPT-2 by hand in PyTorch, then trained GPT-2 small (124 million parameters) from random weights on 9.85 billion tokens. It took one rented GPU, 15.6 hours of training, and about $12 of compute in all. On held-out educational web text, the kind it trained on, it scores a lower loss than OpenAI's original.
 tags: [LLMs, PyTorch, Training]
 links:
   - label: Model on Hugging Face
